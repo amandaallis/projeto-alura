@@ -1,5 +1,6 @@
 package br.com.alura.ProjetoAlura.user;
 
+import br.com.alura.ProjetoAlura.user.entity.User;
 import br.com.alura.ProjetoAlura.util.EncryptUtil;
 import org.junit.jupiter.api.Test;
 
