@@ -30,9 +30,9 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "user/newStudent").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user/all").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user").hasRole("INSTRUCTOR")
+                        .requestMatchers(HttpMethod.POST, "user/newUser").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/course/new").hasAuthority("INSTRUCTOR")
+                        .requestMatchers(HttpMethod.POST, "/course/{code}/inactive").hasAuthority("INSTRUCTOR")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

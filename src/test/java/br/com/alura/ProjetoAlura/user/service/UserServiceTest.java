@@ -1,7 +1,7 @@
 package br.com.alura.ProjetoAlura.user.service;
 
 import br.com.alura.ProjetoAlura.user.Role;
-import br.com.alura.ProjetoAlura.user.dto.NewStudentUserDTO;
+import br.com.alura.ProjetoAlura.user.dto.NewUserDTO;
 import br.com.alura.ProjetoAlura.user.entity.User;
 import br.com.alura.ProjetoAlura.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,11 +39,11 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
-    private NewStudentUserDTO validNewStudentDTO;
+    private NewUserDTO validNewStudentDTO;
 
     @BeforeEach
     void setUp() {
-        validNewStudentDTO = new NewStudentUserDTO();
+        validNewStudentDTO = new NewUserDTO();
         validNewStudentDTO.setEmail("charles@alura.com.br");
         validNewStudentDTO.setName("Charles");
         validNewStudentDTO.setPassword("mudar123");
@@ -53,7 +53,7 @@ public class UserServiceTest {
     void newStudent__should_return_bad_request_when_email_already_exists() throws Exception {
         when(userRepository.existsByEmail(validNewStudentDTO.getEmail())).thenReturn(true);
 
-        mockMvc.perform(post("/user/newStudent")
+        mockMvc.perform(post("/user/newUser")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validNewStudentDTO)))
                 .andExpect(status().isBadRequest())
@@ -66,7 +66,7 @@ public class UserServiceTest {
         when(userRepository.existsByEmail(validNewStudentDTO.getEmail())).thenReturn(false);
         when(userRepository.save(any(User.class))).thenReturn(validNewStudentDTO.toModel());
 
-        mockMvc.perform(post("/user/newStudent")
+        mockMvc.perform(post("/user/newUser")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validNewStudentDTO)))
                 .andExpect(status().isCreated());

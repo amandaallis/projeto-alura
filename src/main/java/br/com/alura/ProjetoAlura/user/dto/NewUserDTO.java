@@ -1,5 +1,6 @@
 package br.com.alura.ProjetoAlura.user.dto;
 
+import br.com.alura.ProjetoAlura.user.Role;
 import br.com.alura.ProjetoAlura.user.entity.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,11 +9,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-import static br.com.alura.ProjetoAlura.user.Role.STUDENT;
-
 @Getter
 @Setter
-public class NewStudentUserDTO {
+public class NewUserDTO {
 
     @NotNull
     @Length(min = 3, max = 50)
@@ -23,11 +22,13 @@ public class NewStudentUserDTO {
     private String email;
 
     @NotNull
+    private Role role;
+
+    @NotNull
     @Length(min = 8, max = 16)
     private String password;
 
     public User toModel() {
-        return new User(name, email, STUDENT, password);
+        return new User(name, email, role, password);
     }
-
 }

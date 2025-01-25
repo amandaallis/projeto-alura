@@ -1,0 +1,10 @@
+CREATE TABLE Course (
+    id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    code VARCHAR(100) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    instructorId BIGINT NOT NULL,
+    description VARCHAR(255),
+    status ENUM('ACTIVE', 'INACTIVE') DEFAULT 'ACTIVE',
+    inactivateDate TIMESTAMP NULL,
+    CONSTRAINT fkInstructorId FOREIGN KEY (instructorId) REFERENCES User (id)
+);

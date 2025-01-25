@@ -1,19 +1,18 @@
-package br.com.alura.ProjetoAlura.registration;
+package br.com.alura.ProjetoAlura.registration.dto;
 
-import jakarta.validation.constraints.Email;
+import br.com.alura.ProjetoAlura.course.entity.Course;
+import br.com.alura.ProjetoAlura.registration.entity.Registration;
+import br.com.alura.ProjetoAlura.user.entity.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDateTime;
 
 public class NewRegistrationDTO {
 
     @NotBlank
     @NotNull
     private String courseCode;
-
-    @NotBlank
-    @NotNull
-    @Email
-    private String studentEmail;
 
     public NewRegistrationDTO() {}
 
@@ -25,12 +24,7 @@ public class NewRegistrationDTO {
         this.courseCode = courseCode;
     }
 
-    public String getStudentEmail() {
-        return studentEmail;
+    public Registration toModel(Course course, User user) {
+        return new Registration(LocalDateTime.now(), course, user);
     }
-
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
-    }
-
 }

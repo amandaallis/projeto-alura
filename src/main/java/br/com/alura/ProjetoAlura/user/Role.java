@@ -1,8 +1,8 @@
 package br.com.alura.ProjetoAlura.user;
 
 public enum Role {
-    STUDENT("student"),
-    INSTRUCTOR("instructor");
+    STUDENT("STUDENT"),
+    INSTRUCTOR("INSTRUCTOR");
 
     private String role;
 

@@ -1,0 +1,8 @@
+CREATE TABLE Registration (
+    id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    registrationDate TIMESTAMP NOT NULL,
+    courseId BIGINT NOT NULL,
+    userId BIGINT NOT NULL,
+    CONSTRAINT fkCourseId FOREIGN KEY (courseId) REFERENCES Course (id),
+    CONSTRAINT fkUserId FOREIGN KEY (userId) REFERENCES User (id)
+)

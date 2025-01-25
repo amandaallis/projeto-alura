@@ -1,6 +1,6 @@
 package br.com.alura.ProjetoAlura.user.service;
 
-import br.com.alura.ProjetoAlura.user.dto.NewStudentUserDTO;
+import br.com.alura.ProjetoAlura.user.dto.NewUserDTO;
 import br.com.alura.ProjetoAlura.user.dto.UserItemDTO;
 import br.com.alura.ProjetoAlura.user.entity.User;
 import static br.com.alura.ProjetoAlura.user.error.UserError.toEmailAlreadyRegisteredError;
@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -22,7 +23,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<Object> newStudent(NewStudentUserDTO newStudent) {
+    public ResponseEntity<Object> newStudent(NewUserDTO newStudent) {
         boolean alreadyExistUserWithEmail = userRepository.existsByEmail(newStudent.getEmail());
 
         if (alreadyExistUserWithEmail) {
@@ -41,6 +42,10 @@ public class UserService {
                 .stream()
                 .map(UserItemDTO::new)
                 .toList();
+    }
+
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id);
     }
 }
 
